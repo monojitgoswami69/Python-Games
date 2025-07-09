@@ -57,7 +57,7 @@ while True:
         user_input = input(">>>")
     if user_input in "qQ":
         print()
-        countdown3s("Quiting")
+        countdown3s("Quitting")
         break  
     computer_choice = choice_list[random.randint(0,2)]
     user_choice = choice_list[int(user_input)-1]
