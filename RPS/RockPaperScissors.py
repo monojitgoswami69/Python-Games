@@ -120,13 +120,13 @@ User won {user_wins} rounds
 Computer won {computer_wins} rounds
 {ties} rounds were tied
 Your Score: {user_score}
-Computer's Score: {computer_score}   
-        """)
+Computer's Score: {computer_score}\n   
+""")
         # check and print Series result
         if user_score == computer_score:
             game_result = "\033[33mThe Series is a Draw!\033[0m"
         elif user_score>computer_score:
-            game_result = "\033[33mCongratulations!! You Win the Series!\033[0m"
+            game_result = "\033[32mCongratulations!! You Win the Series!\033[0m"
         else:
             game_result = "\033[31mAlas!! You Lose the Series!\033[0m"
         time.sleep(0.5)
