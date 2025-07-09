@@ -41,7 +41,7 @@ Rules of the game-
 User has to choose among Rock/Paper/Scissors and compete with the computer
    Reversed Logic Mode (because chaos is fun) -
    {choice_list[2]} beats {choice_list[0]} [Scissors absolutely destroy Rock because why not]
-   {choice_list[0]} beats {choice_list[1]} [Rock yeets Paper into a recycling bin]
+   {choice_list[0]} beats {choice_list[1]} [Rock drills a hole into Paper's soul]
    {choice_list[1]} beat {choice_list[2]}  [Paper wraps Scissors like a burrito of defeat]
 Good Luck! Hope you enjoy our game!!
 """

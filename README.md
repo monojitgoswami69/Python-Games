@@ -19,6 +19,20 @@ A fully interactive terminal game located in `RPS/RockPaperScissors.py`.
 
 ---
 
+### 🌀 RPS: Reversed Logic Edition
+Located in `RPS/RockPaperScissors_Reversed.py`  
+This is the **OG Rock Paper Scissors... but unhinged**.
+
+All features from the original RPS game apply — same interface, same animations, same sarcasm **except**:
+- 🌀 **Reversed logic** (Scissors beats Rock?! WHAT?!)
+- 🎭 **Chaos Mode enabled:** 
+>✂️ Scissors absolutely destroy Rock because why not   
+>🪨 Rock drills a hole into Paper's soul  
+>📄 Paper wraps Scissors like a burrito of defeat
+- 🧪 Pure chaos, zero reason — maximum entertainment
+
+---
+
 ### 🔐 Input Suppressor Utility
 Located in `Input_suppressor/input_suppressor.py`  
 A cross-platform input suppressor using `msvcrt` (Windows) and `termios/tty` (Unix/macOS/Linux).
@@ -32,4 +46,3 @@ from Input_suppressor.input_suppressor import suppress_input
 
 with suppress_input():
     # Block keyboard input during this block
-
