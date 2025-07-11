@@ -1,33 +1,13 @@
 import time, random, os, sys
 # Add the parent directory (Python-Games/) to sys.path
+print(__file__)
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-# import input supressor
-from Input_suppressor.input_suppressor import suppress_input
-# define function for printing with typewriter_effect
-def typewriter_print(sample):
-    for line in sample.splitlines():
-        for i in range(len(line)):
-            print(line[:i+1], end="\r", flush=True)
-            time.sleep(0.01)
-        print(line)
-        time.sleep(0.5)  
-# define clear buffer function
-def clear_screen():
-    os.system('cls' if os.name == 'nt' else 'clear')
-# define function for fetching Current scoreboard 
-def scoreboard():
-    return f"""
-Round: {rounds+1}
-\033[1mScoreBoard-\033[0m
-You: {user_score}
-Computer: {computer_score}
-"""
-# define function for printing 3 second countdowns
-def countdown3s(text):
-    for i in range(3,0,-1):
-        for j in range(4):
-            print(f"{text} {i}{"."*j}    ", end="\r", flush=True)
-            time.sleep(1/4)
+# import assets
+from assets.input_suppressor import suppress_input
+from assets.typewriter_print import tprint
+from assets.clear_screen import clear_screen
+from assets.countdown import countdown
+from assets.scoreboard import scoreboard #rounds, userscore,computerscore
 # =========== EXECUTION BEGINS ============
 # clear buffer before execution
 clear_screen()
@@ -52,20 +32,19 @@ Enter Your choice:
 3. ✂️  scissors
 Q. Stop Playing"""
 with suppress_input():
-    typewriter_print(header1)
-    countdown3s("The game starts in")
-    print(" "*50,end="\r",flush=True)
+    tprint(header1)
+    countdown("The game starts in",3)
     time.sleep(1)
-    typewriter_print(scoreboard())
+    tprint(scoreboard(rounds,user_score,computer_score))
     time.sleep(0.5)
-    typewriter_print(header2)
+    tprint(header2)
 # ===== PRIMARY LOOP =====
 while True:
     # print static headers including current scoreboard
     clear_screen()
     with suppress_input():
         print(header1, end="")
-        print(scoreboard(), end="")
+        print(scoreboard(rounds,user_score,computer_score), end="")
         print(header2)
     user_input = input(">>>")
     # validate input
@@ -75,16 +54,16 @@ while True:
     # check quit status
     if user_input in ("q","Q"):
         print()
-        countdown3s("Quitting")
+        countdown("Quitting",3)
         break  
     with suppress_input():
         # define current iteration choices
         computer_choice = choice_list[random.randint(0,2)]
         user_choice = choice_list[int(user_input)-1]
         time.sleep(1)
-        typewriter_print(f"\nYou chose {user_choice}")
+        tprint(f"\nYou chose {user_choice}")
         time.sleep(0.5)
-        typewriter_print(f"Computer chose {computer_choice}")
+        tprint(f"Computer chose {computer_choice}")
         time.sleep(0.5)
         # check result and update score
         if user_choice == computer_choice:
@@ -104,17 +83,17 @@ while True:
         print(f"{round_result}\n")
         time.sleep(1)
         rounds+=1
-        countdown3s("Next round in")
+        countdown("Next round in",3)
         clear_screen()
 # ====== GAME END ======
 with suppress_input():
     clear_screen()
     time.sleep(0.5)
-    typewriter_print("----- GAME END -----\n")
+    tprint("----- GAME END -----\n")
     time.sleep(0.5)
     # print game statistics if played 
     if rounds>0:
-        typewriter_print(f"""\n\033[1mGame statistics-\033[0m
+        tprint(f"""\n\033[1mGame statistics-\033[0m
 Rounds played: {rounds}
 User won {user_wins} rounds
 Computer won {computer_wins} rounds
@@ -130,11 +109,11 @@ Computer's Score: {computer_score}\n
         else:
             game_result = "\033[31mAlas!! You Lose the Series!\033[0m"
         time.sleep(0.5)
-        typewriter_print(game_result)
+        tprint(game_result)
     # roast user if not played 
     else:
-        typewriter_print("""
-    OH man you didn't even try!
-    Next time, pick something! The computer was READY.  
+        tprint("""
+    You ghosted the computer harder than its ex.
+    Next time, press a key. ANY key.
     """)
-    print("\n"*5)
+    print("\n"*5) 
