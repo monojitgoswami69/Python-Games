@@ -7,7 +7,8 @@ from assets.input_suppressor import suppress_input
 from assets.typewriter_print import tprint
 from assets.clear_screen import clear_screen
 from assets.countdown import countdown
-import assets.scoreboard as scoreboard #rounds, userscore,computerscore
+from assets.scoreboard import scoreboard 
+from assets.text_formatting import red, green, yellow, bold
 # =========== EXECUTION BEGINS ============
 # clear buffer before execution
 clear_screen()
@@ -67,16 +68,16 @@ while True:
         time.sleep(0.5)
         # check result and update score
         if user_choice == computer_choice:
-            round_result = "\033[33mIt's a tie!\033[0m"
+            round_result = yellow("It's a tie!")
             user_score+=1
             computer_score+=1
             ties += 1
         elif (user_choice==choice_list[2] and computer_choice==choice_list[0]) or (user_choice==choice_list[1] and computer_choice==choice_list[2]) or (user_choice==choice_list[0] and computer_choice==choice_list[1]):
-            round_result = "\033[32mYou win!\033[0m"
+            round_result = green("You win!")
             user_score+=1
             user_wins +=1
         else:
-            round_result = "\033[31mYou Lose!\033[0m"       
+            round_result = red("You Lose!")       
             computer_score+=1
             computer_wins+=1
         # print result
@@ -93,7 +94,7 @@ with suppress_input():
     time.sleep(0.5)
     # print game statistics if played 
     if rounds>0:
-        tprint(f"""\n\033[1mGame statistics-\033[0m
+        tprint(f"""\n{bold("Game statistics-")}
 Rounds played: {rounds}
 User won {user_wins} rounds
 Computer won {computer_wins} rounds
@@ -103,11 +104,11 @@ Computer's Score: {computer_score}\n
 """)
         # check and print Series result
         if user_score == computer_score:
-            game_result = "\033[33mThe Series is a Draw!\033[0m"
+            game_result = yellow("The Series is a Draw!")
         elif user_score>computer_score:
-            game_result = "\033[32mCongratulations!! You Win the Series!\033[0m"
+            game_result = green("Congratulations!! You Win the Series!")
         else:
-            game_result = "\033[31mAlas!! You Lose the Series!\033[0m"
+            game_result = red("Alas!! You Lose the Series!")
         time.sleep(0.5)
         tprint(game_result)
     # roast user if not played 
